@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-0cfb066c-83cb-477f-bf8a-8aec5665b19a/styles.css">
+<link rel="stylesheet" href="adn-theme.css">
+<script src="_ds/organic-0cfb066c-83cb-477f-bf8a-8aec5665b19a/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500..700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+  .sim-root { container-type: inline-size; font-family: 'Source Sans 3', system-ui, sans-serif; color: var(--adn-ink); }
+  .sim-shell { display: grid; grid-template-columns: minmax(0, 1fr) 372px; gap: 0; background: var(--adn-raise); border: 1px solid var(--adn-line); border-radius: 20px; overflow: hidden; }
+  .sim-side { background: var(--adn-strip); color: var(--adn-strip-ink); padding: 30px; display: flex; flex-direction: column; }
+  .sim-main { padding: 30px 32px 34px; }
+  .sim-2col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .sim-3col { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .sim-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sim-chip { display: inline-flex; flex-direction: column; gap: 2px; padding: 12px 16px; border: 1px solid var(--adn-line); border-radius: 12px; background: var(--adn-raise); cursor: pointer; font: inherit; text-align: left; transition: border-color 140ms ease, background 140ms ease; }
+  .sim-chip:hover { border-color: var(--adn-accent); }
+  .sim-chip > b { font-size: 15px; font-weight: 600; }
+  .sim-chip > span { font-size: 12.5px; color: var(--adn-muted); }
+  .sim-chip[aria-pressed="true"] { border-color: var(--adn-accent); background: var(--adn-accent-soft); }
+  .sim-chip[aria-pressed="true"] > span { color: var(--adn-accent-strong); }
+  .sim-num { width: 100%; min-height: 50px; padding: 12px 14px; font: inherit; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--adn-ink); background: var(--adn-raise); border: 1px solid var(--adn-line); border-radius: 10px; }
+  .sim-num:focus-visible { outline: none; border-color: var(--adn-accent); box-shadow: 0 0 0 3px var(--adn-accent-soft); }
+  .sim-range { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; }
+  .sim-range::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--adn-accent), var(--adn-accent-strong)); }
+  .sim-range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; margin-top: -8px; border-radius: 50%; background: var(--adn-raise); border: 2px solid var(--adn-accent); }
+  .sim-range::-moz-range-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--adn-accent), var(--adn-accent-strong)); }
+  .sim-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--adn-raise); border: 2px solid var(--adn-accent); }
+  .sim-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 9px 0; border-bottom: 1px solid var(--adn-strip-line); }
+  .sim-row:last-child { border-bottom: 0; }
+  .sim-row > span:first-child { opacity: 0.7; }
+  .sim-row > span:last-child { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .sim-offer { display: grid; grid-template-columns: minmax(150px, 1.4fr) repeat(3, minmax(84px, 0.8fr)) auto; gap: 18px; align-items: center; padding: 18px 20px; border: 1px solid var(--adn-line); border-radius: 14px; background: var(--adn-raise); }
+  .sim-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sim-step { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--adn-line); background: transparent; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--adn-muted); cursor: pointer; }
+  .sim-step[aria-current="true"] { border-color: var(--adn-accent); background: var(--adn-accent); color: #FFFFFF; }
+  .sim-step[data-done="1"] { border-color: var(--adn-accent); color: var(--adn-accent); background: var(--adn-accent-soft); }
+  .sim-bar { height: 6px; border-radius: 999px; background: var(--adn-strip-line); overflow: hidden; }
+  .sim-live { display: none; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; margin: -4px 0 20px; padding: 14px 16px; border-radius: 12px; background: var(--adn-surf); border: 1px solid var(--adn-line); }
+  .sim-bar > i { display: block; height: 100%; border-radius: 999px; background: var(--adn-accent); }
+  @container (max-width: 940px) {
+    .sim-shell { grid-template-columns: minmax(0, 1fr); }
+    .sim-side { order: 1; }
+    .sim-live { display: flex !important; }
+    .sim-offer { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @container (max-width: 720px) { .sim-main { padding: 22px 20px 26px; } .sim-side { padding: 22px 20px; } .sim-offer { grid-template-columns: minmax(0, 1fr); gap: 12px; } .sim-chip { width: 100%; } }
+  @container (max-width: 520px) { .sim-2col, .sim-3col { grid-template-columns: minmax(0, 1fr); } .sim-step { font-size: 12px; padding: 6px 11px; } }
+</style>
+</helmet>
+
+<div class="sim-root">
+  <div class="sim-shell">
+    <div class="sim-main">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 22px">
+        <div class="sim-steps">
+          <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+            <button type="button" class="sim-step" aria-current="{{ st.current }}" data-done="{{ st.done }}" onClick="{{ st.onGo }}">{{ st.label }}</button>
+          </sc-for>
+        </div>
+        <span style="margin-left: auto; font-size: 13px; color: var(--adn-muted)">{{ progressLabel }}</span>
+      </div>
+
+      <div class="sim-live">
+        <span class="adn-num" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; line-height: 1">{{ bestMonthly }} {{ symbol }}</span>
+        <span style="font-size: 13px; color: var(--adn-muted)">rată de la · dobândă {{ minRate }} · șanse {{ scoreLabel }}</span>
+      </div>
+
+      <sc-if value="{{ atAsset }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; line-height: 1.2; margin: 0 0 8px">Ce vrei să finanțezi?</h3>
+          <p style="margin: 0 0 20px; font-size: 15px; color: var(--adn-muted)">Alegerea schimbă partenerii, dobânda de start și perioadele disponibile.</p>
+          <div class="sim-chips">
+            <sc-for list="{{ assetOptions }}" as="a" hint-placeholder-count="5">
+              <button type="button" class="sim-chip" aria-pressed="{{ a.on }}" onClick="{{ a.onPick }}"><b>{{ a.label }}</b><span>{{ a.hint }}</span></button>
+            </sc-for>
+          </div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; line-height: 1.2; margin: 28px 0 8px">Bunul este nou sau rulat?</h3>
+          <div class="sim-chips">
+            <sc-for list="{{ conditionOptions }}" as="c" hint-placeholder-count="2">
+              <button type="button" class="sim-chip" aria-pressed="{{ c.on }}" onClick="{{ c.onPick }}"><b>{{ c.label }}</b><span>{{ c.hint }}</span></button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atProfile }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; line-height: 1.2; margin: 0 0 8px">Cine solicită finanțarea?</h3>
+          <p style="margin: 0 0 20px; font-size: 15px; color: var(--adn-muted)">Profilul determină avansul minim acceptat și documentele din dosar.</p>
+          <div class="sim-chips">
+            <sc-for list="{{ profileOptions }}" as="p" hint-placeholder-count="4">
+              <button type="button" class="sim-chip" aria-pressed="{{ p.on }}" onClick="{{ p.onPick }}"><b>{{ p.label }}</b><span>{{ p.hint }}</span></button>
+            </sc-for>
+          </div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; line-height: 1.2; margin: 28px 0 8px">Istoricul de plată</h3>
+          <p style="margin: 0 0 16px; font-size: 14px; color: var(--adn-muted)">Restanțele active sunt principalul motiv de refuz. Spune-ne din start, ca să nu pierzi timp.</p>
+          <div class="sim-chips">
+            <sc-for list="{{ historyOptions }}" as="h" hint-placeholder-count="3">
+              <button type="button" class="sim-chip" aria-pressed="{{ h.on }}" onClick="{{ h.onPick }}"><b>{{ h.label }}</b><span>{{ h.hint }}</span></button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atNumbers }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; line-height: 1.2; margin: 0 0 8px">{{ numbersTitle }}</h3>
+          <p style="margin: 0 0 22px; font-size: 15px; color: var(--adn-muted)">Rezultatul din dreapta se recalculează la fiecare modificare.</p>
+          <div class="sim-2col">
+            <div>
+              <label class="adn-label" for="sim-price" style="display: block; color: var(--adn-muted); margin-bottom: 9px">{{ priceLabel }} ({{ symbol }})</label>
+              <input id="sim-price" class="sim-num" type="number" min="1000" step="500" value="{{ price }}" onChange="{{ onPrice }}" onInput="{{ onPrice }}">
+              <input class="sim-range" type="range" min="{{ priceMin }}" max="{{ priceMax }}" step="500" style="margin-top: 8px" value="{{ price }}" onChange="{{ onPrice }}" onInput="{{ onPrice }}">
+            </div>
+            <div>
+              <label class="adn-label" for="sim-avans" style="display: block; color: var(--adn-muted); margin-bottom: 9px">Avans · <span style="color: var(--adn-accent)">{{ avansPct }}%</span></label>
+              <input id="sim-avans" class="sim-num" type="number" min="0" step="100" value="{{ avansSumRaw }}" onChange="{{ onAvansSum }}" onInput="{{ onAvansSum }}">
+              <input class="sim-range" type="range" min="{{ avansMin }}" max="{{ avansMax }}" step="1" style="margin-top: 8px" value="{{ avansPct }}" onChange="{{ onAvans }}" onInput="{{ onAvans }}">
+              <p style="margin: 4px 0 0; font-size: 12.5px; color: var(--adn-faint)">{{ avansHint }}</p>
+            </div>
+          </div>
+
+          <div class="sim-2col" style="margin-top: 22px">
+            <div>
+              <label class="adn-label" for="sim-months" style="display: block; color: var(--adn-muted); margin-bottom: 9px">Durata contractului</label>
+              <select id="sim-months" class="sim-num" value="{{ months }}" onChange="{{ onMonths }}">
+                <sc-for list="{{ termOptions }}" as="t" hint-placeholder-count="5">
+                  <option value="{{ t.value }}">{{ t.label }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div>
+              <label class="adn-label" for="sim-currency" style="display: block; color: var(--adn-muted); margin-bottom: 9px">Moneda</label>
+              <select id="sim-currency" class="sim-num" value="{{ currency }}" onChange="{{ onCurrency }}">
+                <option value="EUR">EUR</option>
+                <option value="RON">RON</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top: 26px; padding: 18px 20px; border: 1px solid var(--adn-line); border-radius: 14px; background: var(--adn-surf)">
+            <p class="adn-label" style="color: var(--adn-accent); margin: 0 0 8px">Ce schimbă rata</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--adn-body)">{{ leverText }}</p>
+            <button type="button" class="adn-btn adn-btn-outline" style="margin-top: 14px; padding: 10px 18px; font-size: 14px" onClick="{{ onApplyLever }}">{{ leverCta }}</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atOffers }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin-bottom: 6px">
+            <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; line-height: 1.2; margin: 0">{{ offerCount }} structuri pentru dosarul tău</h3>
+            <span style="{{ verdictBadgeStyle }}">{{ verdictBadge }}</span>
+          </div>
+          <p style="margin: 0 0 18px; font-size: 15px; line-height: 1.6; color: var(--adn-body)">{{ verdictText }}</p>
+
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px">
+            <span class="adn-label" style="color: var(--adn-muted); margin-right: 4px">Sortează</span>
+            <button type="button" style="{{ sortRataStyle }}" onClick="{{ sortByRata }}">Rată lunară</button>
+            <button type="button" style="{{ sortCostStyle }}" onClick="{{ sortByCost }}">Cost total</button>
+            <button type="button" style="{{ sortSansaStyle }}" onClick="{{ sortBySansa }}">Șanse de aprobare</button>
+          </div>
+
+          <div style="display: grid; gap: 12px">
+            <sc-for list="{{ offers }}" as="o" hint-placeholder-count="5">
+              <div style="{{ o.cardStyle }}">
+                <div class="sim-offer" style="border: 0; padding: 0; background: transparent">
+                  <div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px">
+                      <span style="{{ o.tagStyle }}">{{ o.type }}</span>
+                      <span style="{{ o.badgeStyle }}">{{ o.badge }}</span>
+                    </div>
+                    <h4 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; line-height: 1.2; margin: 0">{{ o.name }}</h4>
+                    <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--adn-muted)">{{ o.note }}</p>
+                  </div>
+                  <div>
+                    <p class="adn-label" style="color: var(--adn-faint); margin: 0 0 4px">Rată</p>
+                    <p class="adn-num" style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; line-height: 1.1; color: var(--adn-accent)">{{ o.monthly }}</p>
+                  </div>
+                  <div>
+                    <p class="adn-label" style="color: var(--adn-faint); margin: 0 0 4px">Dobândă</p>
+                    <p class="adn-num" style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; line-height: 1.1">{{ o.rate }}</p>
+                  </div>
+                  <div>
+                    <p class="adn-label" style="color: var(--adn-faint); margin: 0 0 4px">Cost total</p>
+                    <p class="adn-num" style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; line-height: 1.1">{{ o.total }}</p>
+                  </div>
+                  <div style="display: grid; gap: 8px; min-width: 172px">
+                    <button type="button" class="adn-btn adn-btn-primary" style="padding: 11px 18px; font-size: 14px" onClick="{{ o.onRequest }}">Solicită oferta</button>
+                    <button type="button" class="adn-btn adn-btn-quiet" style="font-size: 13px; padding: 4px" onClick="{{ o.onDetails }}">{{ o.detailsLabel }}</button>
+                  </div>
+                </div>
+                <sc-if value="{{ o.open }}" hint-placeholder-val="{{ false }}">
+                  <div class="sim-3col" style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--adn-line-soft)">
+                    <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Comision analiză</p><p class="adn-num" style="margin: 0; font-size: 15px; font-weight: 600">{{ o.fee }}</p></div>
+                    <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Valoare reziduală</p><p class="adn-num" style="margin: 0; font-size: 15px; font-weight: 600">{{ o.residual }}</p></div>
+                    <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Cost finanțare</p><p class="adn-num" style="margin: 0; font-size: 15px; font-weight: 600">{{ o.interest }}</p></div>
+                    <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Șanse de aprobare</p><p style="margin: 0; font-size: 15px; font-weight: 600">{{ o.chance }}</p></div>
+                    <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Avans cerut</p><p class="adn-num" style="margin: 0; font-size: 15px; font-weight: 600">{{ o.avansReq }}</p></div>
+                    <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Se potrivește pentru</p><p style="margin: 0; font-size: 15px; font-weight: 600">{{ o.fit }}</p></div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin: 18px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--adn-faint)">Structurile reflectă practica uzuală a partenerilor. Dobânda, comisioanele și valoarea reziduală se confirmă după analiza documentelor; calculul nu constituie o ofertă ferm.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atRequest }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; line-height: 1.2; margin: 0 0 8px">Cererea ta, deja completată</h3>
+          <p style="margin: 0 0 20px; font-size: 15px; line-height: 1.6; color: var(--adn-body)">Am preluat tot ce ai configurat. Adaugă doar numele și telefonul, iar consultantul primește dosarul exact așa cum îl vezi mai jos.</p>
+
+          <div style="padding: 20px; border: 1px solid var(--adn-line); border-radius: 14px; background: var(--adn-surf); margin-bottom: 22px">
+            <p class="adn-label" style="color: var(--adn-accent); margin: 0 0 12px">Dosar {{ dossierCode }}</p>
+            <div class="sim-3col">
+              <sc-for list="{{ summary }}" as="s" hint-placeholder-count="6">
+                <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">{{ s.k }}</p><p class="adn-num" style="margin: 0; font-size: 15px; font-weight: 600">{{ s.v }}</p></div>
+              </sc-for>
+            </div>
+            <button type="button" class="adn-btn adn-btn-quiet" style="font-size: 13px; padding: 8px 0 0" onClick="{{ backToOffers }}">Modifică varianta sau datele</button>
+          </div>
+
+          <div class="sim-2col">
+            <div>
+              <label class="adn-label" for="sim-name" style="display: block; color: var(--adn-muted); margin-bottom: 8px">Numele tău</label>
+              <input id="sim-name" class="adn-input" type="text" value="{{ name }}" onChange="{{ onName }}" onInput="{{ onName }}">
+            </div>
+            <div>
+              <label class="adn-label" for="sim-phone" style="display: block; color: var(--adn-muted); margin-bottom: 8px">Telefon</label>
+              <input id="sim-phone" class="adn-input" type="tel" value="{{ phone }}" onChange="{{ onPhone }}" onInput="{{ onPhone }}">
+            </div>
+          </div>
+          <div style="margin-top: 16px">
+            <label class="adn-label" for="sim-email" style="display: block; color: var(--adn-muted); margin-bottom: 8px">Email (opțional, pentru oferta scrisă)</label>
+            <input id="sim-email" class="adn-input" type="email" value="{{ email }}" onChange="{{ onEmail }}" onInput="{{ onEmail }}">
+          </div>
+          <div style="margin-top: 16px">
+            <label class="adn-label" for="sim-note" style="display: block; color: var(--adn-muted); margin-bottom: 8px">Detalii despre bun (opțional)</label>
+            <input id="sim-note" class="adn-input" type="text" placeholder="{{ notePlaceholder }}" value="{{ note }}" onChange="{{ onNote }}" onInput="{{ onNote }}">
+          </div>
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 14px 0 0; font-size: 13.5px; color: #8A2F1C; background: #FBE4E0; padding: 10px 14px; border-radius: 10px">{{ errorMsg }}</p>
+          </sc-if>
+          <button type="button" class="adn-btn adn-btn-primary" style="width: 100%; margin-top: 20px; font-size: 16px; padding: 15px 26px" disabled="{{ formInvalid }}" onClick="{{ onSubmit }}">{{ submitLabel }}</button>
+          <p style="margin: 14px 0 0; font-size: 12.5px; line-height: 1.55; color: var(--adn-faint)">Analiza preliminară este gratuită și nu se raportează în birourile de credit. Poți renunța oricând.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atDone }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <p class="adn-label" style="color: var(--adn-accent); margin: 0 0 10px">Dosar înregistrat · {{ dossierCode }}</p>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; line-height: 1.2; margin: 0 0 10px">Mulțumim, {{ firstName }}</h3>
+          <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.65; color: var(--adn-body); max-width: 60ch">Dosarul a plecat către firmele de leasing potrivite profilului tău. Primești ofertele în 24-48 de ore lucrătoare, pe telefon și, dacă ai lăsat adresa, pe email.</p>
+          <div class="sim-3col" style="margin-bottom: 22px">
+            <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Varianta cerută</p><p style="margin: 0; font-size: 15px; font-weight: 600">{{ chosenName }}</p></div>
+            <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Rată estimată</p><p class="adn-num" style="margin: 0; font-size: 15px; font-weight: 600">{{ chosenMonthly }}</p></div>
+            <div><p class="adn-label" style="color: var(--adn-faint); margin: 0 0 3px">Următorul pas</p><p style="margin: 0; font-size: 15px; font-weight: 600">Apel de la consultant</p></div>
+          </div>
+          <p class="adn-label" style="color: var(--adn-muted); margin: 0 0 10px">Ce pregătim împreună</p>
+          <div style="display: grid; gap: 0; margin-bottom: 22px">
+            <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+              <div style="display: flex; gap: 12px; padding: 11px 0; border-top: 1px solid var(--adn-line-soft); font-size: 15px; color: var(--adn-body)"><span style="color: var(--adn-accent)">—</span><span>{{ d.t }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px">
+            <a href="{{ waLink }}" class="adn-btn adn-btn-primary">Vorbește acum pe WhatsApp</a>
+            <a href="tel:+40732961237" class="adn-btn adn-btn-outline">Sună 0732 961 237</a>
+            <button type="button" class="adn-btn adn-btn-quiet" onClick="{{ onRestart }}">Fă altă simulare</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--adn-line-soft)">
+        <button type="button" class="adn-btn adn-btn-outline" style="padding: 12px 20px" disabled="{{ backDisabled }}" onClick="{{ onBack }}">Înapoi</button>
+        <sc-if value="{{ showNext }}" hint-placeholder-val="{{ true }}">
+          <button type="button" class="adn-btn adn-btn-primary" style="margin-left: auto; padding: 12px 24px" onClick="{{ onNext }}">{{ nextLabel }}</button>
+        </sc-if>
+      </div>
+    </div>
+
+    <div class="sim-side">
+      <p class="adn-label" style="color: var(--adn-accent-strong); margin: 0 0 14px">Dosarul tău, în timp real</p>
+      <div style="display: flex; align-items: baseline; gap: 8px">
+        <span class="adn-num" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; line-height: 1">{{ bestMonthly }}</span>
+        <span style="font-size: 14px; opacity: 0.72">{{ symbol }} / lună</span>
+      </div>
+      <p style="margin: 8px 0 18px; font-size: 13px; opacity: 0.7">cea mai bună rată din {{ offerCount }} structuri, la {{ minRate }} pe an</p>
+
+      <div style="margin-bottom: 18px">
+        <div style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-size: 12.5px">
+          <span style="opacity: 0.7">Șanse de aprobare</span>
+          <span style="font-weight: 600; color: var(--adn-accent-strong)">{{ scoreLabel }}</span>
+        </div>
+        <div class="sim-bar"><i style="{{ scoreBarStyle }}"></i></div>
+      </div>
+
+      <div style="margin-bottom: 18px">
+        <sc-for list="{{ sideRows }}" as="r" hint-placeholder-count="6">
+          <div class="sim-row"><span>{{ r.k }}</span><span>{{ r.v }}</span></div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 18px; border-top: 1px solid var(--adn-strip-line)">
+        <p style="margin: 0 0 12px; font-size: 13px; line-height: 1.55; opacity: 0.76">{{ sideHint }}</p>
+        <div style="display: grid; gap: 8px">
+          <button type="button" class="adn-btn adn-btn-primary" style="font-size: 15px" onClick="{{ onJumpOffers }}">{{ sideCta }}</button>
+          <a href="{{ waLink }}" class="adn-btn adn-btn-outline" style="color: var(--adn-strip-ink); border-color: var(--adn-strip-line); font-size: 14px">Trimite pe WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:760},&quot;asset&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;auto&quot;,&quot;flota&quot;,&quot;echipamente&quot;,&quot;imobiliar&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const RON = 4.98;
+
+const ASSETS = {
+  auto: { label: "Autoturism", hint: "nou sau rulat, firmă ori persoană fizică", base: 4.55, spread: 1.75, terms: [12, 24, 36, 48, 60], price: 25000, avans: 15, avansMax: 50, priceLabel: "Preț fără TVA", subject: "leasing auto", note: "Ce mașină vrei? Marcă, model, an" },
+  flota: { label: "Flotă auto", hint: "leasing operațional, servicii incluse", base: 5.5, spread: 2.0, terms: [24, 36, 48, 60], price: 30000, avans: 0, avansMax: 30, priceLabel: "Valoare vehicul fără TVA", subject: "leasing operațional", note: "Câte vehicule și ce rulaj anual" },
+  echipamente: { label: "Echipamente", hint: "utilaje, medical, IT, construcții", base: 5.2, spread: 2.3, terms: [12, 24, 36, 48, 60], price: 45000, avans: 20, avansMax: 50, priceLabel: "Valoare echipament fără TVA", subject: "leasing echipamente", note: "Ce echipament și de la ce furnizor" },
+  imobiliar: { label: "Imobil comercial", hint: "sediu, hală, spațiu comercial", base: 5.5, spread: 1.5, terms: [60, 84, 96, 120, 144], price: 250000, avans: 25, avansMax: 50, priceLabel: "Valoare imobil fără TVA", subject: "leasing imobiliar", note: "Ce imobil, ce suprafață și unde" }
+};
+
+const PROFILES = {
+  firma: { label: "Firmă cu istoric", hint: "peste 12 luni de activitate", bump: 0, avansMin: 15, score: 3 },
+  startup: { label: "Firmă nou înființată", hint: "sub 12 luni", bump: 0.7, avansMin: 30, score: 1 },
+  pfa: { label: "PFA / profesie liberală", hint: "cabinet, birou individual", bump: 0.35, avansMin: 20, score: 2 },
+  fizica: { label: "Persoană fizică", hint: "inclusiv venituri din străinătate", bump: 0.25, avansMin: 15, score: 2 }
+};
+
+const HISTORY = {
+  curat: { label: "Fără întârzieri", hint: "istoric curat", bump: 0, score: 3 },
+  mici: { label: "Întârzieri mici, închise", hint: "sub 30 de zile", bump: 0.3, score: 2 },
+  restante: { label: "Restanțe active", hint: "necesită analiză", bump: 0.9, score: 0 }
+};
+
+const STRUCTURES = [
+  { id: "fix", name: "Dobândă fixă", type: "Financiar", fee: 0.5, residual: 0, delta: 0, chance: 3, fit: "Predictibilitate pe toată durata", note: "Rată constantă, fără recalculări." },
+  { id: "var", name: "Dobândă variabilă", type: "Financiar", fee: 0.4, residual: 0, delta: -0.25, chance: 3, fit: "Toleranță la variații de indice", note: "Se recalculează trimestrial, după IRCC." },
+  { id: "rezid", name: "Cu valoare reziduală", type: "Financiar", fee: 0.3, residual: 0.2, delta: 0.35, chance: 2, fit: "Rată lunară minimă", note: "Reziduală 20% plătită la final." },
+  { id: "flex", name: "Grafic flexibil", type: "Financiar", fee: 0.35, residual: 0.1, delta: 0.5, chance: 2, fit: "Încasări sezoniere", note: "Graficul se ajustează o dată pe an." },
+  { id: "full", name: "Full service", type: "Operațional", fee: 0.25, residual: 0, delta: 0.95, chance: 3, fit: "Flote și utilizare intensă", note: "Asigurări și mentenanță incluse în rată." },
+  { id: "zero", name: "Fără comision de analiză", type: "Financiar", fee: 0, residual: 0, delta: 0.75, chance: 3, fit: "Cash minim la semnare", note: "Zero costuri iniți, dobândă mai mare." },
+  { id: "rapid", name: "Aprobare rapidă", type: "Financiar", fee: 0.6, residual: 0, delta: 1.1, chance: 3, fit: "Termen scurt de livrare", note: "Analiză prioritară, documentație redusă." }
+];
+
+const ORDER = ["asset", "profile", "numbers", "offers", "request", "done"];
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const key = ASSETS[props.asset] ? props.asset : "auto";
+    const cfg = ASSETS[key];
+    this.state = {
+      step: props.asset && ASSETS[props.asset] ? "profile" : "asset",
+      asset: key, condition: "nou", profile: "firma", history: "curat",
+      currency: "EUR", price: cfg.price, avans: Math.max(cfg.avans, PROFILES.firma.avansMin),
+      months: cfg.terms[Math.min(2, cfg.terms.length - 1)],
+      sort: "rata", openId: null, chosen: null,
+      name: "", phone: "", email: "", note: "", firstName: "", code: "",
+      sending: false, error: ""
+    };
+  }
+
+  componentDidMount() {
+    fetch("/api/config-get")
+      .then(r => (r.ok ? r.json() : null))
+      .then(cfg => {
+        if (!cfg || !cfg.assets || !cfg.structures) return;
+        Object.keys(cfg.assets).forEach(k => {
+          if (ASSETS[k]) Object.assign(ASSETS[k], cfg.assets[k]);
+        });
+        STRUCTURES.length = 0;
+        cfg.structures.forEach(st => STRUCTURES.push(st));
+        this.forceUpdate();
+      })
+      .catch(() => {});
+  }
+
+  cfg() { return ASSETS[this.state.asset]; }
+  fmt(n) { return new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 0 }).format(Math.round(n)); }
+  pct(n) { return n.toFixed(2).replace(".", ",") + "%"; }
+  sym() { return this.state.currency === "RON" ? "lei" : "€"; }
+
+  baseRate() {
+    const s = this.state;
+    return this.cfg().base + PROFILES[s.profile].bump + HISTORY[s.history].bump + (s.condition === "rulat" ? 0.55 : 0);
+  }
+
+  score() {
+    const s = this.state;
+    let v = PROFILES[s.profile].score + HISTORY[s.history].score;
+    const min = PROFILES[s.profile].avansMin;
+    v += s.avans >= min + 10 ? 3 : (s.avans >= min ? 2 : 0);
+    v += s.condition === "nou" ? 2 : 1;
+    return Math.min(10, Math.round(v * 10 / 11));
+  }
+
+  build() {
+    const s = this.state;
+    const cfg = this.cfg();
+    const base = this.baseRate();
+    const avansSum = s.price * s.avans / 100;
+    const financed = s.price - avansSum;
+    const n = s.months;
+    const list = STRUCTURES.map(st => {
+      const rate = base + st.delta;
+      const i = rate / 100 / 12;
+      const residualAmt = s.price * st.residual;
+      const monthly = (financed - residualAmt / Math.pow(1 + i, n)) * i / (1 - Math.pow(1 + i, -n));
+      const feeAmt = financed * st.fee / 100;
+      return Object.assign({}, st, {
+        rateNum: rate, monthlyNum: monthly, feeAmt, residualAmt,
+        totalNum: avansSum + monthly * n + feeAmt + residualAmt
+      });
+    });
+    const cmp = {
+      rata: (a, b) => a.monthlyNum - b.monthlyNum,
+      cost: (a, b) => a.totalNum - b.totalNum,
+      sansa: (a, b) => b.chance - a.chance || a.monthlyNum - b.monthlyNum
+    };
+    list.sort(cmp[s.sort] || cmp.rata);
+    const minM = Math.min.apply(null, list.map(o => o.monthlyNum));
+    const minT = Math.min.apply(null, list.map(o => o.totalNum));
+    list.forEach(o => {
+      o.badge = o.monthlyNum === minM ? "Cea mai mică rată" : (o.totalNum === minT ? "Cost total minim" : "");
+    });
+    return { list, avansSum, financed, minM };
+  }
+
+  sortStyle(key) {
+    const on = this.state.sort === key;
+    return "font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; padding: 9px 16px; border-radius: 10px; border: 1px solid " +
+      (on ? "var(--adn-accent)" : "var(--adn-line)") + "; background: " + (on ? "var(--adn-accent)" : "transparent") +
+      "; color: " + (on ? "#FFFFFF" : "var(--adn-ink)");
+  }
+
+  go(step) {
+    this.setState({ step });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const cfg = this.cfg();
+    const symbol = this.sym();
+    const built = this.build();
+    const score = this.score();
+    const locked = this.props.asset && ASSETS[this.props.asset];
+    const stepList = locked ? ORDER.slice(1) : ORDER;
+    const idx = stepList.indexOf(s.step);
+    const labels = { asset: "Bunul", profile: "Profilul", numbers: "Cifrele", offers: "Ofertele", request: "Cererea", done: "Trimis" };
+    const restante = s.history === "restante";
+    const avansMin = PROFILES[s.profile].avansMin;
+
+    let verdictBadge = "Șanse bune";
+    let verdictText = "Profilul tău intră în condițiile uzuale ale partenerilor. Cu documentele complete, primul răspuns vine în 24-48 de ore.";
+    let tone = "good";
+    if (restante || score <= 4) {
+      verdictBadge = "Necesită analiză";
+      verdictText = "Sunt elemente care cer o discuție înainte de aplicare. Un consultant poate propune avans mai mare sau garanții suplimentare ca dosarul să treacă.";
+      tone = "low";
+    } else if (score <= 7) {
+      verdictBadge = "Aprobare probabilă";
+      verdictText = "Dosarul se poate finanța, cu ajustări pe avans sau perioadă. Îți arătăm partenerii care acceptă acest profil.";
+      tone = "mid";
+    }
+
+    const leverPct = Math.min(PROFILES[s.profile].avansMin + 15, Math.min(cfg.avansMax, s.avans + 5));
+    const gain = (() => {
+      const cur = built.minM;
+      const savedFin = s.price * (1 - leverPct / 100);
+      const i = this.baseRate() / 100 / 12;
+      const alt = savedFin * i / (1 - Math.pow(1 + i, -s.months));
+      return Math.max(0, cur - alt);
+    })();
+
+    const chosen = s.chosen ? built.list.filter(o => o.id === s.chosen)[0] || built.list[0] : built.list[0];
+    const waText = "Bună ziua! Dosar " + (s.code || "nou") + ": " + cfg.label.toLowerCase() + " " + this.fmt(s.price) + " " + symbol +
+      ", avans " + s.avans + "%, " + s.months + " luni. Rată estimată " + this.fmt(built.minM) + " " + symbol + "/lună.";
+
+    const setNum = k => e => {
+      const v = Number(e.target.value);
+      if (!Number.isNaN(v)) this.setState({ [k]: v });
+    };
+    const setStr = k => e => this.setState({ [k]: e.target.value });
+
+    return {
+      steps: stepList.filter(k => k !== "done").map((k, i) => ({
+        label: labels[k], current: s.step === k, done: i < idx ? "1" : "0",
+        onGo: () => { if (i <= Math.max(idx, 2)) this.go(k); }
+      })),
+      progressLabel: "Pasul " + Math.max(1, idx + 1) + " din " + (stepList.length - 1),
+      atAsset: s.step === "asset", atProfile: s.step === "profile", atNumbers: s.step === "numbers",
+      atOffers: s.step === "offers", atRequest: s.step === "request", atDone: s.step === "done",
+
+      assetOptions: Object.keys(ASSETS).map(k => ({
+        label: ASSETS[k].label, hint: ASSETS[k].hint, on: s.asset === k,
+        onPick: () => this.setState({ asset: k, price: ASSETS[k].price, avans: Math.max(ASSETS[k].avans, PROFILES[this.state.profile].avansMin), months: ASSETS[k].terms[Math.min(2, ASSETS[k].terms.length - 1)] })
+      })),
+      conditionOptions: [
+        { label: "Nou", hint: "de la dealer sau producător", on: s.condition === "nou", onPick: () => this.setState({ condition: "nou" }) },
+        { label: "Rulat", hint: "dobândă puțin mai mare", on: s.condition === "rulat", onPick: () => this.setState({ condition: "rulat" }) }
+      ],
+      profileOptions: Object.keys(PROFILES).map(k => ({
+        label: PROFILES[k].label, hint: PROFILES[k].hint, on: s.profile === k,
+        onPick: () => this.setState({ profile: k, avans: Math.max(this.state.avans, PROFILES[k].avansMin) })
+      })),
+      historyOptions: Object.keys(HISTORY).map(k => ({
+        label: HISTORY[k].label, hint: HISTORY[k].hint, on: s.history === k,
+        onPick: () => this.setState({ history: k })
+      })),
+
+      numbersTitle: cfg.label + " · cifrele finanțării",
+      priceLabel: cfg.priceLabel, symbol, price: s.price, months: s.months, currency: s.currency,
+      priceMin: s.currency === "RON" ? 20000 : 4000,
+      priceMax: Math.max(s.currency === "RON" ? 400000 : 80000, Math.round(s.price * 3 / 1000) * 1000),
+      avansPct: s.avans, avansMin: 0, avansMax: cfg.avansMax,
+      avansSumRaw: Math.round(built.avansSum),
+      avansHint: "Minim acceptat pentru profilul ales: " + avansMin + "%",
+      termOptions: cfg.terms.map(t => ({ value: t, label: t + " luni" + (t % 12 === 0 ? " (" + (t / 12) + (t === 12 ? " an)" : " ani)") : "") })),
+      leverText: gain > 1
+        ? "Cu un avans de " + leverPct + "% rata scade cu aproximativ " + this.fmt(gain) + " " + symbol + " pe lună și crește șansa de aprobare."
+        : "Ești deja în zona optimă de avans pentru profilul ales. O perioadă mai scurtă reduce costul total al finanțării.",
+      leverCta: gain > 1 ? "Aplică avans " + leverPct + "%" : "Scurtează perioada",
+      onApplyLever: () => {
+        if (gain > 1) this.setState({ avans: leverPct });
+        else this.setState(st => {
+          const t = ASSETS[st.asset].terms;
+          const i = t.indexOf(st.months);
+          return { months: t[Math.max(0, i - 1)] };
+        });
+      },
+
+      offerCount: STRUCTURES.length,
+      verdictBadge, verdictText,
+      verdictBadgeStyle: "font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; background: " +
+        (tone === "good" ? "var(--adn-accent-soft)" : (tone === "mid" ? "var(--adn-surf)" : "var(--adn-line)")) +
+        "; color: " + (tone === "good" ? "var(--adn-accent)" : "var(--adn-body)"),
+      sortRataStyle: this.sortStyle("rata"), sortCostStyle: this.sortStyle("cost"), sortSansaStyle: this.sortStyle("sansa"),
+      sortByRata: () => this.setState({ sort: "rata" }),
+      sortByCost: () => this.setState({ sort: "cost" }),
+      sortBySansa: () => this.setState({ sort: "sansa" }),
+      offers: built.list.map(o => ({
+        name: o.name, type: o.type, note: o.note, badge: o.badge,
+        rate: this.pct(o.rateNum),
+        monthly: this.fmt(o.monthlyNum) + " " + symbol,
+        total: this.fmt(o.totalNum) + " " + symbol,
+        fee: o.feeAmt > 0 ? this.fmt(o.feeAmt) + " " + symbol : "0 " + symbol,
+        residual: o.residualAmt > 0 ? this.fmt(o.residualAmt) + " " + symbol : "—",
+        interest: this.fmt(o.totalNum - s.price) + " " + symbol,
+        chance: o.chance === 3 ? "Ridicate" : "Medii",
+        avansReq: Math.max(s.avans, avansMin) + "%",
+        fit: o.fit,
+        open: s.openId === o.id,
+        detailsLabel: s.openId === o.id ? "Ascunde detaliile" : "Vezi detalii",
+        cardStyle: "padding: 18px 20px; border-radius: 14px; background: var(--adn-raise); border: 1px solid " + (o.badge ? "var(--adn-accent)" : "var(--adn-line)"),
+        tagStyle: "font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: var(--adn-surf); color: var(--adn-muted)",
+        badgeStyle: o.badge
+          ? "font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: var(--adn-accent-soft); color: var(--adn-accent)"
+          : "display: none",
+        onDetails: () => this.setState(st => ({ openId: st.openId === o.id ? null : o.id })),
+        onRequest: () => this.setState({ chosen: o.id, step: "request", code: "ADN-" + Math.floor(100000 + Math.random() * 899999) })
+      })),
+
+      dossierCode: s.code || "ADN-nou",
+      summary: [
+        { k: "Bun finanțat", v: cfg.label + (cfg.label === "Imobil comercial" ? "" : " · " + (s.condition === "nou" ? "nou" : "rulat")) },
+        { k: "Profil", v: PROFILES[s.profile].label },
+        { k: "Valoare", v: this.fmt(s.price) + " " + symbol },
+        { k: "Avans", v: s.avans + "% · " + this.fmt(built.avansSum) + " " + symbol },
+        { k: "Perioadă", v: s.months + " luni" },
+        { k: "Varianta aleasă", v: chosen ? chosen.name + " · " + this.fmt(chosen.monthlyNum) + " " + symbol + "/lună" : "—" }
+      ],
+      notePlaceholder: cfg.note,
+      name: s.name, phone: s.phone, email: s.email, note: s.note,
+      onName: setStr("name"), onPhone: setStr("phone"), onEmail: setStr("email"), onNote: setStr("note"),
+      formInvalid: !(s.name.trim().length > 1 && s.phone.replace(/\D/g, "").length >= 9) || s.sending,
+      hasError: !!s.error, errorMsg: s.error,
+      submitLabel: s.sending ? "Se trimite…" : "Trimite dosarul către parteneri",
+      onSubmit: async () => {
+        if (!(s.name.trim().length > 1 && s.phone.replace(/\D/g, "").length >= 9) || s.sending) return;
+        this.setState({ sending: true, error: "" });
+        try {
+          const res = await fetch("/api/leads-create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              source: "simulator",
+              page: (location.pathname.split("/").pop() || "index.html"),
+              name: s.name, phone: s.phone, email: s.email, message: s.note,
+              asset: s.asset, assetLabel: cfg.label,
+              price: s.price, avansPct: s.avans, months: s.months,
+              structureName: chosen ? chosen.name : "",
+              monthlyEstimate: chosen ? chosen.monthlyNum : built.minM,
+              totalEstimate: chosen ? chosen.totalNum : null,
+              profile: PROFILES[s.profile].label,
+              dossierCode: s.code
+            })
+          });
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          this.setState(st => ({ step: "done", sending: false, firstName: st.name.trim().split(" ")[0] || "", code: data.dossierCode || st.code }));
+        } catch (e) {
+          this.setState({ sending: false, error: "Nu am putut trimite dosarul. Sună-ne la 0732 961 237 sau scrie pe WhatsApp." });
+        }
+      },
+      backToOffers: () => this.go("offers"),
+      firstName: s.firstName,
+      chosenName: chosen ? chosen.name : "—",
+      chosenMonthly: chosen ? this.fmt(chosen.monthlyNum) + " " + symbol + "/lună" : "—",
+      docs: [
+        { t: s.profile === "fizica" ? "Act de identitate și documente de venit, inclusiv din străinătate" : "Documentele firmei și ultimele situații financiare" },
+        { t: s.asset === "imobiliar" ? "Documentația imobilului și raportul de evaluare" : "Oferta furnizorului sau anunțul bunului dorit" },
+        { t: "Confirmarea condițiilor finale și semnarea contractului" }
+      ],
+      onRestart: () => this.setState({ step: locked ? "profile" : "asset", chosen: null, name: "", phone: "", email: "", note: "", code: "" }),
+
+      bestMonthly: this.fmt(built.minM),
+      minRate: this.pct(this.baseRate()),
+      scoreLabel: score + " / 10",
+      scoreBarStyle: "width: " + (score * 10) + "%; background: " + (tone === "good" ? "var(--adn-accent-strong)" : (tone === "mid" ? "var(--adn-accent)" : "#B4674A")),
+      sideRows: [
+        { k: "Bun", v: cfg.label },
+        { k: "Profil", v: PROFILES[s.profile].label },
+        { k: "Valoare", v: this.fmt(s.price) + " " + symbol },
+        { k: "Avans", v: s.avans + "% · " + this.fmt(built.avansSum) + " " + symbol },
+        { k: "Sumă finanțată", v: this.fmt(built.financed) + " " + symbol },
+        { k: "Perioadă", v: s.months + " luni" }
+      ],
+      sideHint: s.step === "offers" || s.step === "request" || s.step === "done"
+        ? "Consultantul primește exact datele din acest panou, fără să le mai completezi tu."
+        : "Poți sări direct la oferte oricând; datele lipsă le completăm în discuție.",
+      sideCta: s.step === "done" ? "Fă altă simulare" : "Vezi cele 7 structuri",
+      onJumpOffers: () => this.go(s.step === "done" ? (locked ? "profile" : "asset") : "offers"),
+      waLink: "https://wa.me/40732961237?text=" + encodeURIComponent(waText),
+
+      backDisabled: idx <= 0,
+      onBack: () => { if (idx > 0) this.go(stepList[idx - 1]); },
+      showNext: s.step !== "done" && s.step !== "request",
+      nextLabel: s.step === "offers" ? "Solicită varianta recomandată" : "Continuă",
+      onNext: () => {
+        if (s.step === "offers") {
+          const top = built.list[0];
+          this.setState({ chosen: top.id, step: "request", code: "ADN-" + Math.floor(100000 + Math.random() * 899999) });
+        } else {
+          this.go(stepList[Math.min(stepList.length - 1, idx + 1)]);
+        }
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

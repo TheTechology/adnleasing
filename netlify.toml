@@ -1,0 +1,52 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Codul sursă al functiilor si fisierele de build nu trebuie servite ca fisiere statice publice.
+[[redirects]]
+  from = "/netlify/*"
+  to = "/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/package.json"
+  to = "/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/index.html"
+  status = 404
+
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/SiteHeader.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/SiteFooter.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/Simulator.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

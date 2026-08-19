@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /uploads/
+Disallow: /admin.html
+Disallow: /netlify/
+
+Sitemap: https://adnleasing.ro/sitemap.xml
