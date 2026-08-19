@@ -1,0 +1,9 @@
+{
+  "name": "adn-leasing-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ADN Leasing — site public + mini-CRM admin (Netlify Functions + Blobs)",
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
+  }
+}

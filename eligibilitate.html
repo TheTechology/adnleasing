@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verifică-ți Eligibilitatea pentru Leasing în 2 Minute | ADN Leasing</title>
+<meta name="description" content="Cinci întrebări rapide și afli ce structură de leasing are cele mai mari șanse de aprobare, avansul recomandat și dobânda estimată.">
+<link rel="canonical" href="https://adnleasing.ro/eligibilitate.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ADN Leasing">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Verifică-ți Eligibilitatea pentru Leasing în 2 Minute | ADN Leasing">
+<meta property="og:description" content="Cinci întrebări rapide și afli ce structură de leasing are cele mai mari șanse de aprobare, avansul recomandat și dobânda estimată.">
+<meta property="og:url" content="https://adnleasing.ro/eligibilitate.html">
+<meta property="og:image" content="https://adnleasing.ro/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Verifică-ți Eligibilitatea pentru Leasing în 2 Minute | ADN Leasing">
+<meta name="twitter:description" content="Cinci întrebări rapide și afli ce structură de leasing are cele mai mari șanse de aprobare, avansul recomandat și dobânda estimată.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Acasă",
+      "item": "https://adnleasing.ro/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Verificare eligibilitate",
+      "item": "https://adnleasing.ro/eligibilitate.html"
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_ds/organic-0cfb066c-83cb-477f-bf8a-8aec5665b19a/styles.css">
+<link rel="stylesheet" href="adn-theme.css">
+<script src="_ds/organic-0cfb066c-83cb-477f-bf8a-8aec5665b19a/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500..700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+  .elig-opt { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid var(--adn-line); border-radius: 12px; background: var(--adn-raise); font-size: 16px; cursor: pointer; transition: border-color 140ms ease, background 140ms ease; }
+  .elig-opt:hover { border-color: var(--adn-accent); }
+  .elig-opt > input { accent-color: var(--adn-accent); width: 18px; height: 18px; }
+  .elig-steps { display: flex; flex-wrap: wrap; gap: 8px; }
+</style>
+</helmet>
+
+<div style="background: var(--adn-bg); color: var(--adn-ink); overflow-x: hidden; min-height: 100vh">
+  <dc-import name="SiteHeader" hint-size="100%,116px"></dc-import>
+
+  <section data-screen-label="Eligibilitate" style="padding: 64px 0 40px">
+    <div class="adn-wrap" style="max-width: 900px">
+      <nav class="adn-crumbs" style="margin-bottom: 22px"><a href="index.html">Acasă</a><span>/</span><span style="color: var(--adn-ink)">Verificare eligibilitate</span></nav>
+      <p class="adn-label" style="color: var(--adn-accent); margin: 0 0 18px">Verificare eligibilitate</p>
+      <h1 class="adn-h1" style="font-size: clamp(32px, 3.6vw, 46px); max-width: 26ch">Vezi în cinci pași ce finanțare ți se potrivește</h1>
+      <p class="adn-lead" style="margin: 20px 0 0; max-width: 60ch">Răspunzi la câteva întrebări despre tine și despre bunul dorit. La final primești o evaluare orientativă și structura de leasing cu cele mai mari șanse de aprobare.</p>
+
+      <div class="elig-steps" style="margin: 34px 0 26px">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="5">
+          <div style="{{ st.style }}">{{ st.label }}</div>
+        </sc-for>
+      </div>
+
+      <div style="background: var(--adn-raise); border: 1px solid var(--adn-line); border-radius: 18px; padding: 34px">
+
+        <sc-if value="{{ showQuestion }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <p class="adn-label" style="color: var(--adn-muted); margin: 0 0 10px">Pasul {{ stepNo }} din {{ stepTotal }}</p>
+            <h2 class="adn-h2" style="font-size: 27px">{{ questionTitle }}</h2>
+            <p style="margin: 12px 0 26px; font-size: 16px; color: var(--adn-muted)">{{ questionNote }}</p>
+            <div style="display: grid; gap: 12px">
+              <sc-for list="{{ options }}" as="opt" hint-placeholder-count="3">
+                <label class="elig-opt" style="{{ opt.style }}">
+                  <input type="radio" name="elig" checked="{{ opt.checked }}" onChange="{{ opt.onPick }}">
+                  <span style="flex: 1">{{ opt.label }}</span>
+                  <span style="font-size: 13px; color: var(--adn-muted)">{{ opt.hint }}</span>
+                </label>
+              </sc-for>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--adn-line-soft)">
+              <button type="button" class="adn-btn adn-btn-outline" disabled="{{ isFirstStep }}" onClick="{{ onBack }}">Înapoi</button>
+              <button type="button" class="adn-btn adn-btn-primary" style="margin-left: auto" disabled="{{ noAnswer }}" onClick="{{ onNext }}">{{ nextLabel }}</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showResult }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <p class="adn-label" style="color: var(--adn-accent); margin: 0 0 12px">Rezultat orientativ</p>
+            <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px">
+              <h2 class="adn-h2" style="font-size: 30px">{{ verdictTitle }}</h2>
+              <span style="{{ scoreStyle }}">{{ scoreLabel }}</span>
+            </div>
+            <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.65; color: var(--adn-body); max-width: 66ch">{{ verdictText }}</p>
+
+            <div class="adn-2col" style="margin-top: 28px">
+              <div style="background: var(--adn-surf); border-radius: 14px; padding: 22px">
+                <p class="adn-label" style="color: var(--adn-muted); margin: 0 0 14px">Structura recomandată</p>
+                <div style="display: grid; gap: 10px; font-size: 15px">
+                  <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: var(--adn-muted)">Tip de leasing</span><span style="font-weight: 600">{{ recType }}</span></div>
+                  <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: var(--adn-muted)">Avans estimat</span><span class="adn-num" style="font-weight: 600">{{ recAvans }}</span></div>
+                  <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: var(--adn-muted)">Dobândă estimată</span><span class="adn-num" style="font-weight: 600">{{ recRate }}</span></div>
+                  <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: var(--adn-muted)">Perioadă</span><span class="adn-num" style="font-weight: 600">{{ recTerm }}</span></div>
+                </div>
+              </div>
+              <div style="background: var(--adn-surf); border-radius: 14px; padding: 22px">
+                <p class="adn-label" style="color: var(--adn-muted); margin: 0 0 14px">Ce pregătim mai departe</p>
+                <div style="display: grid; gap: 10px; font-size: 15px; color: var(--adn-body)">
+                  <sc-for list="{{ nextSteps }}" as="ns" hint-placeholder-count="3">
+                    <div style="display: flex; gap: 10px"><span style="color: var(--adn-accent)">—</span><span>{{ ns.text }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px">
+              <a href="{{ calcLink }}" class="adn-btn adn-btn-primary">Simulează rata</a>
+              <a href="index.html#contact" class="adn-btn adn-btn-outline">Trimite dosarul unui consultant</a>
+              <button type="button" class="adn-btn adn-btn-quiet" onClick="{{ onRestart }}">Reia verificarea</button>
+            </div>
+            <p style="margin: 22px 0 0; font-size: 13px; line-height: 1.6; color: var(--adn-faint); max-width: 70ch">Evaluarea este orientativă și nu reprezintă o decizie de finanțare. Aprobarea finală aparține firmei de leasing, după analiza documentelor.</p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1000,&quot;height&quot;:760}}">
+const QUESTIONS = [
+  {
+    key: "profil", title: "Cine solicită finanțarea?", note: "Profilul determină avansul minim și documentele necesare.",
+    options: [
+      { value: "firma", label: "Firmă cu peste un an de activitate", hint: "SRL, SA", score: 3 },
+      { value: "nou", label: "Firmă nou înființată", hint: "sub 12 luni", score: 1 },
+      { value: "pfa", label: "PFA sau profesie liberală", hint: "cabinet, birou", score: 2 },
+      { value: "fizica", label: "Persoană fizică", hint: "venituri salariale sau din străinătate", score: 2 }
+    ]
+  },
+  {
+    key: "bun", title: "Ce vrei să finanțezi?", note: "Fiecare tip de bun are parteneri și condiții proprii.",
+    options: [
+      { value: "auto", label: "Autoturism sau vehicul comercial", hint: "nou sau rulat", score: 3 },
+      { value: "flota", label: "Flotă auto cu servicii incluse", hint: "operațional", score: 3 },
+      { value: "echipamente", label: "Echipamente sau utilaje", hint: "agro, industrial, medical, IT", score: 2 },
+      { value: "imobil", label: "Imobil comercial", hint: "hală, birou, spațiu comercial", score: 2 }
+    ]
+  },
+  {
+    key: "stare", title: "Bunul este nou sau rulat?", note: "Vechimea influențează dobânda și avansul cerut.",
+    options: [
+      { value: "nou", label: "Nou, de la dealer sau producător", hint: "condiții mai bune", score: 3 },
+      { value: "rulat", label: "Rulat, până la 5 ani", hint: "condiții uzuale", score: 2 },
+      { value: "vechi", label: "Rulat, peste 5 ani", hint: "avans mai mare", score: 1 }
+    ]
+  },
+  {
+    key: "avans", title: "Ce avans poți susține?", note: "Un avans mai mare crește șansele de aprobare și scade rata.",
+    options: [
+      { value: "0", label: "Fără avans", hint: "posibil la operațional", score: 1 },
+      { value: "15", label: "15%", hint: "minimul uzual", score: 2 },
+      { value: "25", label: "20% - 25%", hint: "confortabil", score: 3 },
+      { value: "30", label: "30% sau mai mult", hint: "cele mai bune condiții", score: 3 }
+    ]
+  },
+  {
+    key: "istoric", title: "Cum arată istoricul de plată?", note: "Restanțele active sunt principalul motiv de refuz.",
+    options: [
+      { value: "curat", label: "Fără restanțe și fără întârzieri", hint: "", score: 3 },
+      { value: "mici", label: "Întârzieri mici, închise", hint: "sub 30 de zile", score: 2 },
+      { value: "restante", label: "Restanțe active", hint: "necesită analiză", score: 0 }
+    ]
+  }
+];
+
+const REC = {
+  auto: { type: "Leasing financiar auto", link: "leasing-automobile.html#simulator", term: "1 - 5 ani" },
+  flota: { type: "Leasing operațional", link: "leasing-operational.html#simulator", term: "2 - 5 ani" },
+  echipamente: { type: "Leasing echipamente", link: "leasing-echipamente.html#simulator", term: "1 - 5 ani" },
+  imobil: { type: "Leasing imobiliar", link: "leasing-imobiliar.html#simulator", term: "5 - 12 ani" }
+};
+
+class Component extends DCLogic {
+  state = { step: 0, answers: {}, done: false };
+
+  score() {
+    const a = this.state.answers;
+    let total = 0;
+    QUESTIONS.forEach(q => {
+      const picked = q.options.filter(o => o.value === a[q.key])[0];
+      if (picked) total += picked.score;
+    });
+    return total;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const q = QUESTIONS[Math.min(s.step, QUESTIONS.length - 1)];
+    const answer = s.answers[q.key];
+    const total = this.score();
+    const max = 15;
+    const bun = s.answers.bun || "auto";
+    const rec = REC[bun] || REC.auto;
+    const profil = s.answers.profil;
+    const restante = s.answers.istoric === "restante";
+    let recAvans = "15% - 20%";
+    if (bun === "flota") recAvans = "0% - 10%";
+    else if (bun === "imobil") recAvans = "25%";
+    else if (profil === "nou") recAvans = "30%";
+    else if (s.answers.stare === "vechi") recAvans = "25% - 30%";
+    let recRate = "4,55% - 6,3%";
+    if (bun === "echipamente") recRate = "5,2% - 7,5%";
+    else if (bun === "flota") recRate = "5,5% - 7,5%";
+    else if (bun === "imobil") recRate = "5,5% - 7,0%";
+    let verdictTitle = "Șanse bune de aprobare";
+    let verdictText = "Profilul tău se încadrează în condițiile uzuale ale partenerilor. Cu documentele complete, primul răspuns vine în 24-48 de ore.";
+    let scoreTone = "good";
+    if (restante || total <= 6) {
+      verdictTitle = "Dosarul are nevoie de analiză";
+      verdictText = "Există elemente care cer o discuție înainte de aplicare: restanțe active, activitate scurtă sau avans insuficient. Un consultant poate propune o structură alternativă, cu avans mai mare sau garanții suplimentare.";
+      scoreTone = "low";
+    } else if (total <= 10) {
+      verdictTitle = "Aprobare probabilă, cu ajustări";
+      verdictText = "Se poate finanța, dar avansul sau perioada vor fi ajustate. Îți arătăm variantele partenerilor care acceptă acest profil.";
+      scoreTone = "mid";
+    }
+    const nextSteps = [
+      { text: profil === "fizica" ? "Act de identitate și documente de venit, inclusiv din străinătate" : "Documentele firmei și ultimele situații financiare" },
+      { text: bun === "imobil" ? "Documentația imobilului și raportul de evaluare" : "Oferta furnizorului sau anunțul bunului dorit" },
+      { text: "Comparăm ofertele partenerilor și îți trimitem variantele reale" }
+    ];
+    return {
+      steps: QUESTIONS.map((qq, k) => {
+        const active = !s.done && k === s.step;
+        const filled = !!s.answers[qq.key];
+        return {
+          label: String(k + 1).padStart(2, "0"),
+          style: "font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; padding: 8px 14px; border-radius: 999px; border: 1px solid " +
+            (active ? "var(--adn-accent)" : "var(--adn-line)") + "; background: " + (active ? "var(--adn-accent)" : (filled ? "var(--adn-accent-soft)" : "transparent")) +
+            "; color: " + (active ? "#FFFFFF" : (filled ? "var(--adn-accent)" : "var(--adn-muted)"))
+        };
+      }),
+      showQuestion: !s.done, showResult: s.done,
+      stepNo: s.step + 1, stepTotal: QUESTIONS.length,
+      questionTitle: q.title, questionNote: q.note,
+      options: q.options.map(o => ({
+        label: o.label, hint: o.hint, checked: answer === o.value,
+        style: answer === o.value ? "border-color: var(--adn-accent); background: var(--adn-accent-soft)" : "",
+        onPick: () => this.setState(st => {
+          const next = Object.assign({}, st.answers);
+          next[q.key] = o.value;
+          return { answers: next };
+        })
+      })),
+      noAnswer: !answer,
+      isFirstStep: s.step === 0,
+      nextLabel: s.step === QUESTIONS.length - 1 ? "Vezi rezultatul" : "Continuă",
+      onBack: () => this.setState(st => ({ step: Math.max(0, st.step - 1) })),
+      onNext: () => this.setState(st => (st.step === QUESTIONS.length - 1 ? { done: true } : { step: st.step + 1 })),
+      onRestart: () => this.setState({ step: 0, answers: {}, done: false }),
+      verdictTitle, verdictText,
+      scoreLabel: total + " / " + max + " puncte",
+      scoreStyle: "font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; background: " +
+        (scoreTone === "good" ? "var(--adn-accent-soft)" : (scoreTone === "mid" ? "var(--adn-surf)" : "var(--adn-line)")) + "; color: " + (scoreTone === "good" ? "var(--adn-accent)" : "var(--adn-body)"),
+      recType: rec.type, recTerm: rec.term, recAvans, recRate,
+      calcLink: rec.link,
+      nextSteps
+    };
+  }
+}
+
+</script>
+</body>
+</html>

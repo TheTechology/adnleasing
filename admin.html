@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — ADN Leasing</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="adn-theme.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500..700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  body { background: var(--adn-surf); min-height: 100vh; }
+
+  /* ---------- top bar ---------- */
+  .adm-topbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; background: var(--adn-headerbg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--adn-line); }
+  .adm-topbar-left { display: flex; align-items: center; gap: 14px; }
+  .adm-topbar img { height: 26px; width: auto; display: block; }
+  .adm-topbar-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--adn-muted); border-left: 1px solid var(--adn-line); padding-left: 14px; }
+  .adm-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--adn-muted); text-decoration: none; padding: 8px 12px; border-radius: 8px; }
+  .adm-back:hover { color: var(--adn-accent); background: var(--adn-accent-soft); }
+  .adm-back svg { width: 15px; height: 15px; }
+  .adm-topbar-right { display: flex; align-items: center; gap: 10px; }
+
+  .adm-shell { max-width: 1180px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ---------- login screen ---------- */
+  .adm-login-screen { min-height: calc(100vh - 65px); display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(circle at 50% -10%, var(--adn-accent-soft) 0%, var(--adn-surf) 55%); }
+  .adm-login-card { width: 100%; max-width: 400px; background: var(--adn-raise); border: 1px solid var(--adn-line); border-radius: 20px; padding: 36px 32px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10); }
+  .adm-login-mark { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: var(--adn-strip); color: var(--adn-strip-ink); margin: 0 auto 20px; }
+  .adm-login-mark svg { width: 24px; height: 24px; }
+  .adm-login-card h1 { margin: 0 0 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 23px; text-align: center; }
+  .adm-login-card > p.adm-sub { margin: 0 0 26px; text-align: center; }
+  .adm-field { display: grid; gap: 6px; margin-bottom: 16px; }
+  .adm-field label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--adn-muted); }
+  .adm-pw-wrap { position: relative; }
+  .adm-pw-wrap svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--adn-faint); pointer-events: none; }
+  .adm-pw-wrap input { padding-left: 38px; }
+  .adm-login-card .adn-btn { width: 100%; margin-top: 4px; }
+  .adm-login-back { display: block; text-align: center; margin-top: 20px; font-size: 13.5px; color: var(--adn-muted); text-decoration: none; }
+  .adm-login-back:hover { color: var(--adn-accent); }
+  .adm-file-warning { max-width: 460px; }
+  .adm-file-warning .adm-login-mark { background: #b4674a; }
+
+  .adm-spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: adm-spin 700ms linear infinite; vertical-align: -2px; margin-right: 8px; }
+  @keyframes adm-spin { to { transform: rotate(360deg); } }
+
+  /* ---------- app shell ---------- */
+  .adm-card { background: var(--adn-raise); border: 1px solid var(--adn-line); border-radius: 16px; padding: 24px; }
+  .adm-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .adm-tab { font: inherit; font-size: 14px; font-weight: 600; padding: 10px 18px; border-radius: 10px; border: 1px solid var(--adn-line); background: var(--adn-raise); color: var(--adn-ink); cursor: pointer; transition: background 140ms ease, border-color 140ms ease, color 140ms ease; }
+  .adm-tab:hover { border-color: var(--adn-accent); color: var(--adn-accent); }
+  .adm-tab.on, .adm-tab.on:hover { background: var(--adn-accent); border-color: var(--adn-accent); color: #fff; }
+  .adm-field { display: grid; gap: 6px; margin-bottom: 14px; }
+  .adm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .adm-msg { display: flex; align-items: center; gap: 8px; font-size: 13.5px; padding: 11px 14px; border-radius: 10px; margin-bottom: 14px; }
+  .adm-msg.err { background: #fbe4e0; color: #8a2f1c; }
+  .adm-msg.ok { background: var(--adn-accent-soft); color: var(--adn-accent-strong); }
+  table.adm-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.adm-table th, table.adm-table td { text-align: left; padding: 12px; border-bottom: 1px solid var(--adn-line-soft); vertical-align: top; }
+  table.adm-table tbody tr:hover > td { background: var(--adn-surf); }
+  table.adm-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--adn-muted); }
+  .adm-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: var(--adn-surf); color: var(--adn-body); white-space: nowrap; }
+  .adm-badge.nou { background: var(--adn-accent-soft); color: var(--adn-accent-strong); }
+  .adm-badge.castigat { background: #dff0da; color: #2c5c22; }
+  .adm-badge.pierdut, .adm-badge.respins { background: #fbe4e0; color: #8a2f1c; }
+  .adm-lead-detail { display: none; background: var(--adn-surf); border-radius: 12px; padding: 16px; margin-top: 8px; }
+  .adm-lead-detail.open { display: block; }
+  .adm-notes { display: grid; gap: 6px; margin: 10px 0; max-height: 160px; overflow-y: auto; }
+  .adm-note { font-size: 13px; background: var(--adn-raise); border-radius: 8px; padding: 8px 10px; }
+  .adm-note time { display: block; font-size: 11px; color: var(--adn-muted); margin-bottom: 2px; }
+  select.adm-input, input.adm-input, textarea.adm-input { width: 100%; min-height: 42px; padding: 9px 12px; font-family: inherit; font-size: 14px; border: 1px solid var(--adn-line); border-radius: 8px; background: var(--adn-raise); color: var(--adn-ink); transition: border-color 140ms ease, box-shadow 140ms ease; }
+  select.adm-input:focus, input.adm-input:focus, textarea.adm-input:focus { outline: none; border-color: var(--adn-accent); box-shadow: 0 0 0 3px var(--adn-accent-soft); }
+  .adm-structures-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 0.8fr 1.6fr; gap: 8px; align-items: end; padding: 10px 0; border-top: 1px solid var(--adn-line-soft); }
+  .adm-hidden { display: none !important; }
+  .adm-muted { color: var(--adn-muted); font-size: 13px; }
+  .adm-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  @media (max-width: 760px) {
+    .adm-structures-row { grid-template-columns: 1fr 1fr; }
+    .adm-topbar { padding: 14px 16px; }
+    .adm-topbar-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="adm-topbar">
+  <div class="adm-topbar-left">
+    <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none; color: var(--adn-ink)">
+      <img src="adn-logo.png" alt="ADN Leasing" width="562" height="87">
+    </a>
+    <span class="adm-topbar-tag">Panou de administrare</span>
+  </div>
+  <div class="adm-topbar-right">
+    <a href="index.html" class="adm-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+      Înapoi la site
+    </a>
+    <button type="button" id="logoutBtn" class="adn-btn adn-btn-outline adm-hidden">Deconectare</button>
+  </div>
+</div>
+
+<div id="fileWarning" class="adm-login-screen adm-hidden">
+  <div class="adm-login-card adm-file-warning">
+    <div class="adm-login-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"></path><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+    </div>
+    <h1>Pagina asta trebuie servită de un server</h1>
+    <p class="adm-sub">Ai deschis fișierul direct (<code>file://</code>) — panoul de admin are nevoie de un server activ pentru a putea vorbi cu baza de date. Deschide una din adresele:</p>
+    <ul style="font-size: 13.5px; line-height: 1.7; color: var(--adn-body); padding-left: 18px; margin: 0 0 18px">
+      <li><code>netlify dev</code> pornit local → <code>http://localhost:8888/admin.html</code></li>
+      <li>site-ul publicat pe Netlify → <code>https://numele-site-ului.netlify.app/admin.html</code></li>
+    </ul>
+    <a href="index.html" class="adn-btn adn-btn-outline" style="width:100%; justify-content:center">← Înapoi la site</a>
+  </div>
+</div>
+
+<div id="loginView" class="adm-login-screen adm-hidden">
+  <div class="adm-login-card">
+    <div class="adm-login-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+    </div>
+    <h1>Acces admin</h1>
+    <p class="adm-sub adm-muted">Introdu parola pentru cereri, dobânzi și configurarea simulatoarelor.</p>
+    <div id="loginMsg"></div>
+    <div class="adm-field">
+      <label for="pw">Parolă</label>
+      <div class="adm-pw-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+        <input class="adm-input" type="password" id="pw" autocomplete="current-password" placeholder="••••••••">
+      </div>
+    </div>
+    <button type="button" class="adn-btn adn-btn-primary" id="loginBtn">Autentificare</button>
+    <a href="index.html" class="adm-login-back">← Înapoi la site</a>
+  </div>
+</div>
+
+<div id="appView" class="adm-hidden">
+  <div class="adm-shell">
+    <div class="adm-tabs">
+      <button type="button" class="adm-tab on" data-tab="leads">Cereri (CRM)</button>
+      <button type="button" class="adm-tab" data-tab="config">Configurare simulator</button>
+      <button type="button" class="adm-tab" data-tab="partners">Parteneri</button>
+    </div>
+
+    <section id="tabLeads">
+      <div class="adm-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px">
+          <h2 style="margin:0; font-size:18px">Cereri primite</h2>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+            <select class="adm-input" id="filterStatus" style="min-height:38px; width:auto">
+              <option value="">Toate statusurile</option>
+              <option value="nou">Nou</option>
+              <option value="contactat">Contactat</option>
+              <option value="in_analiza">În analiză</option>
+              <option value="aprobat">Aprobat</option>
+              <option value="respins">Respins</option>
+              <option value="castigat">Câștigat</option>
+              <option value="pierdut">Pierdut</option>
+            </select>
+            <select class="adm-input" id="filterSource" style="min-height:38px; width:auto">
+              <option value="">Toate sursele</option>
+              <option value="contact_homepage">Formular contact</option>
+              <option value="simulator">Simulator</option>
+            </select>
+            <button type="button" class="adn-btn adn-btn-outline" id="refreshLeads">Reîncarcă</button>
+          </div>
+        </div>
+        <div id="leadsMsg"></div>
+        <div id="leadsWrap" class="adm-muted">Se încarcă…</div>
+      </div>
+    </section>
+
+    <section id="tabConfig" class="adm-hidden">
+      <div class="adm-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:6px">
+          <h2 style="margin:0; font-size:18px">Tipuri de leasing — dobânzi, avans, perioade</h2>
+          <span class="adm-muted" id="configUpdatedAt"></span>
+        </div>
+        <p class="adm-muted" style="margin:0 0 16px">Aceste valori alimentează direct simulatorul de pe toate paginile. Dobânda afișată clientului este dobândă de bază + variații pe profil/istoric/structură.</p>
+        <div id="configMsg"></div>
+        <div id="assetsWrap"></div>
+
+        <h2 style="margin:28px 0 6px; font-size:18px">Structuri de finanțare (cele 7 oferte comparate)</h2>
+        <p class="adm-muted" style="margin:0 0 14px">Comision (%), valoare reziduală (fracție din preț, ex. 0.2 = 20%), abatere dobândă (puncte procentuale față de dobânda de bază) și șansa de aprobare (0-3).</p>
+        <div class="adm-structures-row adm-muted" style="border-top:none; font-size:11px; text-transform:uppercase; letter-spacing:0.06em">
+          <span>Nume</span><span>Comision %</span><span>Reziduală</span><span>Abatere dobândă</span><span>Șansă</span><span>Recomandare (fit)</span>
+        </div>
+        <div id="structuresWrap"></div>
+
+        <div class="adm-actions">
+          <button type="button" class="adn-btn adn-btn-primary" id="saveConfig">Salvează configurarea</button>
+          <button type="button" class="adn-btn adn-btn-outline" id="resetConfig">Resetează la valorile implicite</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="tabPartners" class="adm-hidden">
+      <div class="adm-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:6px">
+          <h2 style="margin:0; font-size:18px">Parteneri afișați pe pagina „Parteneri”</h2>
+        </div>
+        <p class="adm-muted" style="margin:0 0 16px">Adaugă sau elimină firme de leasing partenere. Pentru logo, folosește un link către o imagine (https://…) sau o cale către un fișier încărcat în folderul <code>uploads/</code> al site-ului (ex. <code>uploads/partener-x.png</code>). Bifează „Vizibil” ca să apară public.</p>
+        <div id="partnersMsg"></div>
+        <div id="partnersWrap"></div>
+        <div class="adm-actions">
+          <button type="button" class="adn-btn adn-btn-outline" id="addPartner">+ Adaugă partener</button>
+        </div>
+        <div class="adm-actions">
+          <button type="button" class="adn-btn adn-btn-primary" id="savePartners">Salvează partenerii</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // A pagina asta e deschisă direct din fișier (dublu-click), fetch() nu poate funcționa deloc —
+  // afișăm direct explicația, fără să mai încercăm login-ul degeaba.
+  if (location.protocol === "file:") {
+    document.getElementById("fileWarning").classList.remove("adm-hidden");
+    return;
+  }
+
+  function el(tag, attrs, children) {
+    var node = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === "text") node.textContent = attrs[k];
+      else if (k === "html") node.innerHTML = attrs[k];
+      else node.setAttribute(k, attrs[k]);
+    });
+    (children || []).forEach(function (c) { if (c) node.appendChild(c); });
+    return node;
+  }
+
+  function money(n, symbol) {
+    if (n === null || n === undefined) return "—";
+    return new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 0 }).format(Math.round(n)) + (symbol ? " " + symbol : "");
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return "—";
+    try { return new Date(iso).toLocaleString("ro-RO", { dateStyle: "medium", timeStyle: "short" }); }
+    catch (e) { return iso; }
+  }
+
+  async function api(path, opts) {
+    let res;
+    try {
+      res = await fetch("/api/" + path, Object.assign({ credentials: "include" }, opts || {}));
+    } catch (networkErr) {
+      throw new Error("Nu am putut contacta serverul. Verifică că \"netlify dev\" rulează (local) sau că accesezi pagina publicată pe Netlify.");
+    }
+    let data = null;
+    try { data = await res.json(); } catch (e) {}
+    if (!res.ok) throw new Error((data && data.error) || ("Eroare " + res.status));
+    return data;
+  }
+
+  function showMsg(container, text, kind) {
+    container.innerHTML = "";
+    if (!text) return;
+    container.appendChild(el("div", { class: "adm-msg " + (kind || "err"), text: text }));
+  }
+
+  // ---------- auth ----------
+  const loginView = document.getElementById("loginView");
+  const appView = document.getElementById("appView");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  async function checkSession() {
+    try {
+      const s = await api("admin-session");
+      setAuthed(!!s.authenticated);
+    } catch (e) {
+      loginView.classList.remove("adm-hidden");
+      showMsg(document.getElementById("loginMsg"), e.message, "err");
+    }
+  }
+
+  function setAuthed(authed) {
+    loginView.classList.toggle("adm-hidden", authed);
+    appView.classList.toggle("adm-hidden", !authed);
+    logoutBtn.classList.toggle("adm-hidden", !authed);
+    if (authed) { loadLeads(); loadConfig(); }
+  }
+
+  const loginBtn = document.getElementById("loginBtn");
+  const pwInput = document.getElementById("pw");
+
+  async function doLogin() {
+    const pw = pwInput.value;
+    const msg = document.getElementById("loginMsg");
+    showMsg(msg, "");
+    if (!pw) { showMsg(msg, "Introdu parola."); return; }
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<span class="adm-spinner"></span>Se verifică…';
+    try {
+      await api("admin-login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw }) });
+      setAuthed(true);
+    } catch (e) {
+      showMsg(msg, e.message, "err");
+    } finally {
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Autentificare";
+    }
+  }
+
+  loginBtn.addEventListener("click", doLogin);
+  pwInput.addEventListener("keydown", function (e) { if (e.key === "Enter") doLogin(); });
+  logoutBtn.addEventListener("click", async function () {
+    try { await api("admin-logout", { method: "POST" }); } catch (e) {}
+    pwInput.value = "";
+    setAuthed(false);
+  });
+
+  // ---------- tabs ----------
+  document.querySelectorAll(".adm-tab").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".adm-tab").forEach(function (b) { b.classList.remove("on"); });
+      btn.classList.add("on");
+      document.getElementById("tabLeads").classList.toggle("adm-hidden", btn.dataset.tab !== "leads");
+      document.getElementById("tabConfig").classList.toggle("adm-hidden", btn.dataset.tab !== "config");
+      document.getElementById("tabPartners").classList.toggle("adm-hidden", btn.dataset.tab !== "partners");
+    });
+  });
+
+  // ---------- leads (CRM) ----------
+  const STATUS_LABEL = { nou: "Nou", contactat: "Contactat", in_analiza: "În analiză", aprobat: "Aprobat", respins: "Respins", castigat: "Câștigat", pierdut: "Pierdut" };
+  const SOURCE_LABEL = { contact_homepage: "Formular contact", simulator: "Simulator" };
+  let leadsCache = [];
+
+  async function loadLeads() {
+    const wrap = document.getElementById("leadsWrap");
+    const msg = document.getElementById("leadsMsg");
+    wrap.innerHTML = "Se încarcă…";
+    try {
+      const data = await api("leads-list");
+      leadsCache = data.leads || [];
+      renderLeads();
+    } catch (e) {
+      wrap.innerHTML = "";
+      showMsg(msg, e.message, "err");
+    }
+  }
+
+  function renderLeads() {
+    const wrap = document.getElementById("leadsWrap");
+    const statusFilter = document.getElementById("filterStatus").value;
+    const sourceFilter = document.getElementById("filterSource").value;
+    const rows = leadsCache.filter(function (l) {
+      return (!statusFilter || l.status === statusFilter) && (!sourceFilter || l.source === sourceFilter);
+    });
+
+    wrap.innerHTML = "";
+    if (!rows.length) {
+      wrap.appendChild(el("p", { class: "adm-muted", text: "Nicio cerere găsită." }));
+      return;
+    }
+
+    const table = el("table", { class: "adm-table" });
+    const thead = el("thead", {}, [el("tr", {}, [
+      el("th", { text: "Data" }), el("th", { text: "Nume" }), el("th", { text: "Contact" }),
+      el("th", { text: "Sursă" }), el("th", { text: "Simulare" }), el("th", { text: "Status" }), el("th", { text: "" })
+    ])]);
+    table.appendChild(thead);
+    const tbody = el("tbody");
+
+    rows.forEach(function (lead) {
+      const tr = el("tr");
+      tr.appendChild(el("td", { text: fmtDate(lead.createdAt) }));
+      tr.appendChild(el("td", { text: lead.name || "—" }));
+      tr.appendChild(el("td", { html: (lead.phone || "—") + "<br><span class=\"adm-muted\">" + (lead.email || "") + "</span>" }));
+      tr.appendChild(el("td", { text: SOURCE_LABEL[lead.source] || lead.source || "—" }));
+      const simText = lead.assetLabel ? (lead.assetLabel + (lead.monthlyEstimate ? " · " + money(lead.monthlyEstimate) + "/lună" : "")) : "—";
+      tr.appendChild(el("td", { text: simText }));
+      tr.appendChild(el("td", {}, [el("span", { class: "adm-badge " + lead.status, text: STATUS_LABEL[lead.status] || lead.status })]));
+      const toggleBtn = el("button", { type: "button", class: "adn-btn adn-btn-outline", text: "Detalii" });
+      tr.appendChild(el("td", {}, [toggleBtn]));
+      tbody.appendChild(tr);
+
+      const detailTr = el("tr");
+      const detailTd = el("td", { colspan: "7" });
+      const detail = buildLeadDetail(lead);
+      detailTd.appendChild(detail);
+      detailTr.appendChild(detailTd);
+      tbody.appendChild(detailTr);
+
+      toggleBtn.addEventListener("click", function () {
+        detail.classList.toggle("open");
+      });
+    });
+
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+  }
+
+  function buildLeadDetail(lead) {
+    const wrap = el("div", { class: "adm-lead-detail" });
+
+    if (lead.message) wrap.appendChild(el("p", {}, [el("b", { text: "Mesaj: " }), document.createTextNode(lead.message)]));
+    if (lead.dossierCode) wrap.appendChild(el("p", { class: "adm-muted", text: "Cod dosar: " + lead.dossierCode + " · Pagina: " + (lead.page || "—") }));
+    if (lead.price) {
+      wrap.appendChild(el("p", { class: "adm-muted", text: "Valoare bun: " + money(lead.price) + " · Avans: " + (lead.avansPct != null ? lead.avansPct + "%" : "—") + " · Perioadă: " + (lead.months || "—") + " luni · Structură: " + (lead.structureName || "—") + " · Total estimat: " + money(lead.totalEstimate) }));
+    }
+
+    const notesWrap = el("div", { class: "adm-notes" });
+    (lead.notes || []).forEach(function (n) {
+      notesWrap.appendChild(el("div", { class: "adm-note", html: "<time>" + fmtDate(n.at) + "</time>" + n.text.replace(/</g, "&lt;") }));
+    });
+    wrap.appendChild(notesWrap);
+
+    const row = el("div", { class: "adm-row" });
+
+    const statusSel = el("select", { class: "adm-input" });
+    Object.keys(STATUS_LABEL).forEach(function (k) {
+      const opt = el("option", { value: k, text: STATUS_LABEL[k] });
+      if (k === lead.status) opt.setAttribute("selected", "selected");
+      statusSel.appendChild(opt);
+    });
+    row.appendChild(statusSel);
+
+    const assignedInput = el("input", { class: "adm-input", type: "text", placeholder: "Alocat cui?", value: lead.assignedTo || "" });
+    row.appendChild(assignedInput);
+    wrap.appendChild(row);
+
+    const noteInput = el("textarea", { class: "adm-input", placeholder: "Adaugă o notă (ex. „Sunat, revine luni”)", style: "min-height:60px; margin-top:10px" });
+    wrap.appendChild(noteInput);
+
+    const actions = el("div", { class: "adm-actions" });
+    const saveBtn = el("button", { type: "button", class: "adn-btn adn-btn-primary", text: "Salvează" });
+    const delBtn = el("button", { type: "button", class: "adn-btn adn-btn-outline", text: "Șterge cererea" });
+    actions.appendChild(saveBtn);
+    actions.appendChild(delBtn);
+    wrap.appendChild(actions);
+
+    saveBtn.addEventListener("click", async function () {
+      try {
+        await api("leads-update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: lead.id, status: statusSel.value, assignedTo: assignedInput.value, note: noteInput.value }),
+        });
+        noteInput.value = "";
+        await loadLeads();
+      } catch (e) {
+        showMsg(document.getElementById("leadsMsg"), e.message, "err");
+      }
+    });
+
+    delBtn.addEventListener("click", async function () {
+      if (!confirm("Ștergi definitiv această cerere?")) return;
+      try {
+        await api("leads-delete", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: lead.id }) });
+        await loadLeads();
+      } catch (e) {
+        showMsg(document.getElementById("leadsMsg"), e.message, "err");
+      }
+    });
+
+    return wrap;
+  }
+
+  document.getElementById("refreshLeads").addEventListener("click", loadLeads);
+  document.getElementById("filterStatus").addEventListener("change", renderLeads);
+  document.getElementById("filterSource").addEventListener("change", renderLeads);
+
+  // ---------- config (rates/avans/terms/structures) ----------
+  let configCache = null;
+  const ASSET_LABELS = { auto: "Autoturism", flota: "Flotă auto", echipamente: "Echipamente", imobiliar: "Imobil comercial" };
+
+  async function loadConfig() {
+    const msg = document.getElementById("configMsg");
+    try {
+      configCache = await api("config-get");
+      renderConfig();
+    } catch (e) {
+      showMsg(msg, e.message, "err");
+    }
+  }
+
+  function renderConfig() {
+    document.getElementById("configUpdatedAt").textContent = configCache.updatedAt
+      ? "Ultima actualizare: " + fmtDate(configCache.updatedAt)
+      : "Valori implicite (nesalvate încă)";
+
+    const assetsWrap = document.getElementById("assetsWrap");
+    assetsWrap.innerHTML = "";
+    Object.keys(configCache.assets).forEach(function (key) {
+      const a = configCache.assets[key];
+      const card = el("div", { class: "adm-card", style: "margin-bottom:14px; background:var(--adn-surf)" });
+      card.appendChild(el("h3", { style: "margin:0 0 10px; font-size:15px", text: ASSET_LABELS[key] || key }));
+
+      const row1 = el("div", { class: "adm-row" });
+      row1.appendChild(field("Dobândă de bază (%/an)", key, "base", a.base, "number", "0.01"));
+      row1.appendChild(field("Marjă maximă (%)", key, "spread", a.spread, "number", "0.01"));
+      row1.appendChild(field("Preț implicit (" + "€" + ")", key, "price", a.price, "number", "100"));
+      row1.appendChild(field("Avans implicit (%)", key, "avans", a.avans, "number", "1"));
+      row1.appendChild(field("Avans maxim (%)", key, "avansMax", a.avansMax, "number", "1"));
+      card.appendChild(row1);
+
+      const row2 = el("div", { class: "adm-row", style: "margin-top:10px" });
+      row2.appendChild(field("Perioade (luni, separate prin virgulă)", key, "terms", a.terms.join(", "), "text"));
+      row2.appendChild(field("Etichetă preț", key, "priceLabel", a.priceLabel, "text"));
+      card.appendChild(row2);
+
+      const row3 = el("div", { class: "adm-row", style: "margin-top:10px" });
+      row3.appendChild(field("Nume afișat", key, "label", a.label, "text"));
+      row3.appendChild(field("Subtitlu", key, "hint", a.hint, "text"));
+      card.appendChild(row3);
+
+      card.appendChild(field("Placeholder mesaj cerere", key, "note", a.note, "text"));
+
+      assetsWrap.appendChild(card);
+    });
+
+    const structuresWrap = document.getElementById("structuresWrap");
+    structuresWrap.innerHTML = "";
+    configCache.structures.forEach(function (st, idx) {
+      const row = el("div", { class: "adm-structures-row" });
+      row.appendChild(sField(idx, "name", st.name, "text"));
+      row.appendChild(sField(idx, "fee", st.fee, "number", "0.01"));
+      row.appendChild(sField(idx, "residual", st.residual, "number", "0.01"));
+      row.appendChild(sField(idx, "delta", st.delta, "number", "0.01"));
+      row.appendChild(sField(idx, "chance", st.chance, "number", "1"));
+      row.appendChild(sField(idx, "fit", st.fit, "text"));
+      structuresWrap.appendChild(row);
+    });
+  }
+
+  function field(label, assetKey, fieldKey, value, type, step) {
+    const wrap = el("div", { class: "adm-field" });
+    wrap.appendChild(el("label", { text: label }));
+    const input = el("input", { class: "adm-input", type: type, value: value });
+    if (step) input.setAttribute("step", step);
+    input.dataset.asset = assetKey;
+    input.dataset.field = fieldKey;
+    wrap.appendChild(input);
+    return wrap;
+  }
+
+  function sField(idx, fieldKey, value, type, step) {
+    const input = el("input", { class: "adm-input", type: type, value: value });
+    if (step) input.setAttribute("step", step);
+    input.dataset.structIdx = String(idx);
+    input.dataset.field = fieldKey;
+    return input;
+  }
+
+  function collectConfigFromForm() {
+    const assets = {};
+    Object.keys(configCache.assets).forEach(function (key) {
+      const original = configCache.assets[key];
+      const inputs = document.querySelectorAll('#assetsWrap input[data-asset="' + key + '"]');
+      const values = {};
+      inputs.forEach(function (input) { values[input.dataset.field] = input.value; });
+      assets[key] = Object.assign({}, original, {
+        base: parseFloat(values.base),
+        spread: parseFloat(values.spread),
+        price: parseFloat(values.price),
+        avans: parseFloat(values.avans),
+        avansMax: parseFloat(values.avansMax),
+        terms: values.terms.split(",").map(function (s) { return parseInt(s.trim(), 10); }).filter(function (n) { return !isNaN(n); }),
+        priceLabel: values.priceLabel,
+        label: values.label,
+        hint: values.hint,
+        note: values.note,
+      });
+    });
+
+    const structures = configCache.structures.map(function (original, idx) {
+      const inputs = document.querySelectorAll('#structuresWrap input[data-struct-idx="' + idx + '"]');
+      const values = {};
+      inputs.forEach(function (input) { values[input.dataset.field] = input.value; });
+      return Object.assign({}, original, {
+        name: values.name,
+        fee: parseFloat(values.fee),
+        residual: parseFloat(values.residual),
+        delta: parseFloat(values.delta),
+        chance: parseFloat(values.chance),
+        fit: values.fit,
+      });
+    });
+
+    return { assets, structures };
+  }
+
+  document.getElementById("saveConfig").addEventListener("click", async function () {
+    const msg = document.getElementById("configMsg");
+    showMsg(msg, "");
+    try {
+      const payload = collectConfigFromForm();
+      const data = await api("config-set", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      configCache = data.config;
+      renderConfig();
+      showMsg(msg, "Configurarea a fost salvată.", "ok");
+    } catch (e) {
+      showMsg(msg, e.message, "err");
+    }
+  });
+
+  document.getElementById("resetConfig").addEventListener("click", async function () {
+    if (!confirm("Revii la valorile implicite pentru toate tipurile de leasing și toate structurile?")) return;
+    const msg = document.getElementById("configMsg");
+    try {
+      const data = await api("config-reset", { method: "POST" });
+      configCache = data.config;
+      renderConfig();
+      showMsg(msg, "Configurarea a fost resetată.", "ok");
+    } catch (e) {
+      showMsg(msg, e.message, "err");
+    }
+  });
+
+  checkSession();
+})();
+</script>
+</body>
+</html>
